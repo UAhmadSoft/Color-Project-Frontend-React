@@ -24,10 +24,10 @@ const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 //          { name: 'bluegrey', color: '#607D8B' },
 //       ],
 //    }
-function generatePallete(starterPalette) {
+function generatePalette(starterPalette) {
    // ?    basic name , id and emoji setting
    let newPalette = {
-      palettename: starterPalette.palettename,
+      paletteName: starterPalette.paletteName,
       id: starterPalette.id,
       emoji: starterPalette.emoji,
       colors: {},
@@ -76,4 +76,4 @@ function generateScale(hexColor, numColors) {
    return chroma.scale(genRange(hexColor)).mode('lab').colors(numColors);
 }
 
-export { generatePallete };
+export { generatePalette };
