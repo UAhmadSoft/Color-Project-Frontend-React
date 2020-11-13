@@ -1,0 +1,62 @@
+.copy-button,
+.backBtn {
+   width: 100px;
+   height: 30px;
+   position: absolute;
+   display: inline-block;
+   top: 50%;
+   left: 50%;
+   margin-left: -50px;
+   margin-top: -15px;
+   text-align: center;
+   outline: none;
+   background: rgba(255, 255, 255, 0.3);
+   font-size: 1rem;
+   line-height: 30px;
+   color: white;
+   text-transform: uppercase;
+   border: 0;
+   cursor: pointer;
+}
+
+.copy-button {
+}
+.copy-button.light-text {
+   border: 0;
+}
+
+.ColorBox:hover .copy-button {
+   opacity: 1;
+}
+
+.light-text {
+   color: white;
+}
+.ColorBox .dark-text {
+   color: black;
+}
+
+.copy-overlay {
+}
+
+.copy-overlay.show {
+}
+.copied-text {
+}
+
+.copied-text.show {
+}
+
+.copied-text h1 {
+}
+
+.copied-text p {
+}
+
+.SingleColorPalette .ColorBox {
+   height: 50%;
+}
+
+.ColorBox.GoBack {
+   background-color: rgb(0, 0, 0);
+}

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-import './Navbar.css';
+import './styles/Navbar.css';
 
 // import Select from '@material-ui/core/Select';
 // import MenuItem from '@material-ui/core/MenuItem';
@@ -37,26 +37,28 @@ export class Navbar extends Component {
       });
    };
    render() {
-      const { level, changeLevel, handleChange } = this.props;
+      const { level, changeLevel, showSlider } = this.props;
       const { format } = this.state;
       return (
          <nav className='Navbar'>
             <div className='logo'>
                <a href='/'>ReactColorPicker</a>
             </div>
-            <div className='Slider-Container'>
-               <span>Level : {level}</span>
-               <div className='Slider'>
-                  <Slider
-                     defaultValue={level}
-                     min={100}
-                     max={900}
-                     step={100}
-                     onAfterChange={changeLevel}
-                  />
-                  {/* Navbar */}
+            {showSlider && (
+               <div className='Slider-Container'>
+                  <span>Level : {level}</span>
+                  <div className='Slider'>
+                     <Slider
+                        defaultValue={level}
+                        min={100}
+                        max={900}
+                        step={100}
+                        onAfterChange={changeLevel}
+                     />
+                     {/* Navbar */}
+                  </div>
                </div>
-            </div>
+            )}
 
             <div className='select-container'>
                <Select value={format} onChange={this.handleChange}>

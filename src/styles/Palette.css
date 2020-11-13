@@ -1,18 +1,18 @@
 .Palette {
-   height: 100vh;
+   /* height: 100vh;
    /* display: flex;
    flex-direction: column; */
    /* display: flex;
    flex-direction: column; */
-   display: flex;
-   flex-direction: column;
+   /* display: flex;
+   flex-direction: column;  */
 }
-
-.Palette-Colors {
-   /* display: flex;
+/* 
+.Palette-Colors { */
+/* display: flex;
    flex-direction: column; */
-   height: 90%;
-}
+/* height: 90%; */
+/* }
 
 .Palette-footer {
    background-color: #fff;
@@ -26,4 +26,4 @@
 .emoji {
    font-size: 1.5rem;
    margin: 0 1rem;
-}
+} */
