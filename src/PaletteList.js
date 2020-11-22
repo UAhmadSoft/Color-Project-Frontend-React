@@ -39,6 +39,7 @@ export class PaletteList extends Component {
                      />
                   </Link>
                </nav>
+
                <div className={classes.palettes}>
                   {palettes.map((el) => (
                      <MiniPalette

@@ -2,9 +2,11 @@ import React from 'react';
 import { withStyles } from '@material-ui/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './styles/MiniPaletteStyles';
+import DeletePaletteConfirm from './DeletePaletteConfirm';
 
 function MiniPalette(props) {
    const { classes, paletteName, emoji, colors } = props;
+   const [confirmBox, setConfirmBox] = React.useState(false);
    const miniColorBoxes = colors.map((color) => (
       <div
          className={classes.miniColor}
@@ -14,15 +16,21 @@ function MiniPalette(props) {
    ));
 
    function handleClick() {
+      console.log('handleClick of Minipalette');
       props.handleClick(props.id);
    }
    function deletePalette(e) {
-      e.stopPropagation();
+      // e.stopPropagation();
       props.deletePalette(props.id);
+   }
+   function confirmDelete(e) {
+      e.stopPropagation();
+      console.log('opening');
+      setConfirmBox(true);
    }
    return (
       <div className={classes.root} onClick={handleClick}>
-         <span className={classes.DeleteIcon} onClick={deletePalette}>
+         <span className={classes.DeleteIcon} onClick={confirmDelete}>
             <DeleteIcon
                style={{ fontSize: '2em', paddingTop: '5px' }}
             ></DeleteIcon>
@@ -32,6 +40,7 @@ function MiniPalette(props) {
             {paletteName}
             <span className={classes.emoji}>{emoji}</span>
          </h5>
+         <DeletePaletteConfirm isOpen={confirmBox} />
       </div>
    );
 }

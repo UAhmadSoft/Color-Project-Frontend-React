@@ -17,8 +17,6 @@ export class ColorBox extends Component {
          copyOverlay: false,
          copied: false,
       };
-      console.clear();
-      console.log('media is', genMediaQuery('sm'));
    }
    changeCopyState = () => {
       console.log('copied called');

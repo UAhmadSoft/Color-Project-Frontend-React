@@ -128,7 +128,10 @@ export default function PaletteMetaForm(props) {
                   Please enter a palette name. It must be unique ;
                </DialogContentText>
                <ValidatorForm
-                  onSubmit={() => createPalette(newPaletteName)}
+                  onSubmit={() => {
+                     handleClose();
+                     setemojiPickerOpen(true);
+                  }}
                   className={classes.formValidator}
                >
                   <TextValidator
