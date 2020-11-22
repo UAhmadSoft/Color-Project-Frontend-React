@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import MiniPalette from './MiniPalette';
+import DeletePaletteConfirm from './DeletePaletteConfirm';
 
-import uuid from 'uuid/dist/v4';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import styles from './styles/PaletteListStyles';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
@@ -9,10 +10,27 @@ import { withStyles } from '@material-ui/styles';
 import { Link } from 'react-router-dom';
 
 export class PaletteList extends Component {
+   constructor(props) {
+      super(props);
+
+      this.state = {
+         showConfirmDialog: false,
+         deleteId: null,
+      };
+   }
+
    gotoPalette = (id) => {
       // console.log('id is', id);
       this.props.history.push(`/palette/${id}`);
    };
+
+   toogleDialog = () => {
+      console.log('toogle diaglod called');
+      this.setState({
+         showConfirmDialog: !this.state.showConfirmDialog,
+      });
+   };
+
    render() {
       const { palettes, classes, deletePalette } = this.props;
       return (
@@ -40,16 +58,32 @@ export class PaletteList extends Component {
                   </Link>
                </nav>
 
-               <div className={classes.palettes}>
+               <TransitionGroup className={classes.palettes}>
                   {palettes.map((el) => (
-                     <MiniPalette
-                        {...el}
-                        handleClick={this.gotoPalette}
-                        key={uuid()}
-                        deletePalette={(id) => deletePalette(id)}
-                     />
+                     <CSSTransition key={el.id} className='fade' timeout={500}>
+                        <MiniPalette
+                           {...el}
+                           handleClick={this.gotoPalette}
+                           key={el.id}
+                           // deletePalette={(id) => deletePalette(id)}
+                           deletePalette={(id) => {
+                              this.setState({
+                                 deleteId: id,
+                              });
+                              this.toogleDialog();
+                           }}
+                        />
+                     </CSSTransition>
                   ))}
-               </div>
+               </TransitionGroup>
+               <DeletePaletteConfirm
+                  open={this.state.showConfirmDialog}
+                  handleClick={() => {
+                     deletePalette(this.state.deleteId);
+                     this.toogleDialog();
+                  }}
+                  toogleDialog={this.toogleDialog}
+               />
             </div>
          </div>
       );

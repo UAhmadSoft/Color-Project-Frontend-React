@@ -12,6 +12,15 @@ export default {
       backgroundColor: '#1462aa',
       backgroundImage: `url(${bg})`,
       // paddingBottom: '100px',
+      '@global': {
+         '.exit': {
+            opacity: '1',
+         },
+         '.exit-active': {
+            opacity: '0',
+            transition: 'opacity 500ms ease-out',
+         },
+      },
    },
    container: {
       width: '80%',

@@ -37,37 +37,31 @@ const useStyles = makeStyles({
    },
 });
 
-function SimpleDialog(props) {
-   const { handleClick, isOpen } = props;
-   const [open, setOpen] = React.useState(isOpen);
+export default function DeletePaletteConfirm(props) {
+   const { handleClick, open, toogleDialog } = props;
    const classes = useStyles();
-
-   const toogleClose = (e) => {
-      e.stopPropagation();
-      setOpen(!open);
-   };
 
    return (
       <Dialog
-         onClose={toogleClose}
+         onClose={() => toogleDialog()}
          aria-labelledby='simple-dialog-title'
-         open={isOpen}
+         open={open}
          className={classes.root}
       >
          <DialogTitle id='simple-dialog-title' className={classes.Title}>
-            Delete Palette
+            Delete Palette ?
          </DialogTitle>
          <List className={classes.List}>
-            <ListItem button onClick={() => handleClick('yes')} key={uuid()}>
+            <ListItem button onClick={() => handleClick()} key={uuid()}>
                <ListItemAvatar>
                   <Avatar className={classes.yesIcon}>
                      <CheckIcon />
                   </Avatar>
                </ListItemAvatar>
-               <ListItemText primary='Yes' />
+               <ListItemText primary='Delete' />
             </ListItem>
 
-            <ListItem button onClick={() => handleClick('no')} key={uuid()}>
+            <ListItem button onClick={() => toogleDialog()} key={uuid()}>
                <ListItemAvatar>
                   <Avatar className={classes.cancelIcon}>
                      <CancelIcon />
@@ -77,19 +71,5 @@ function SimpleDialog(props) {
             </ListItem>
          </List>
       </Dialog>
-   );
-}
-
-export default function DeletePaletteConfirm(props) {
-   const { deletePalette, isOpen } = props;
-
-   const handleClick = (value) => {
-      deletePalette(value);
-   };
-
-   return (
-      <div>
-         <SimpleDialog handleClick={handleClick} isOpen={isOpen} />
-      </div>
    );
 }
