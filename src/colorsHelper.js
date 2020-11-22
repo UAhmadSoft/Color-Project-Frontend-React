@@ -26,6 +26,9 @@ const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
 //    }
 function generatePalette(starterPalette) {
    // ?    basic name , id and emoji setting
+   if (!starterPalette) {
+      return undefined;
+   }
    let newPalette = {
       paletteName: starterPalette.paletteName,
       id: starterPalette.id,
@@ -56,7 +59,7 @@ function generatePalette(starterPalette) {
             rbg: chroma(scale[i]).css(),
             rbga: chroma(scale[i])
                .css()
-               .replace('rbg', 'rgba')
+               .replace('rgb', 'rgba')
                .replace(')', ',1.0)'),
          });
       }

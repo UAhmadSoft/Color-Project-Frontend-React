@@ -5,6 +5,8 @@ import { withStyles } from '@material-ui/styles';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';
 
+import { genMediaQuery } from './styles/constants';
+
 import styles from './styles/ColorBoxStyles';
 
 export class ColorBox extends Component {
@@ -13,7 +15,10 @@ export class ColorBox extends Component {
 
       this.state = {
          copyOverlay: false,
+         copied: false,
       };
+      console.clear();
+      console.log('media is', genMediaQuery('sm'));
    }
    changeCopyState = () => {
       console.log('copied called');
@@ -23,7 +28,7 @@ export class ColorBox extends Component {
                this.setState({
                   copied: false,
                }),
-            1400
+            1000
          );
       });
    };

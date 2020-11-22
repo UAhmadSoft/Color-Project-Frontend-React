@@ -5,6 +5,7 @@
    align-items: center;
    justify-content: flex-start;
    height: 50px;
+   max-height: 180px;
 }
 
 .logo a {
@@ -13,6 +14,7 @@
 }
 
 .logo {
+   justify-content: center;
    margin-right: 15px;
    padding: 0 13px;
    font-size: 22px;
@@ -22,6 +24,41 @@
    display: flex;
    align-items: center;
    text-align: center;
+}
+@media (max-width: 575px) {
+   .Navbar {
+      /* width: 100% !important; */
+      flex: 100%;
+      max-width: 100%;
+      flex-direction: column;
+   }
+
+   .Navbar > div {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+   }
+}
+@media (max-width: 775px) {
+   .Navbar {
+      /* width: 100% !important; */
+      flex: 100%;
+      max-width: 100%;
+      flex-direction: column;
+   }
+
+   .Navbar > div {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+   }
+}
+@media (min-width: 776px) {
+   .select-container {
+      text-align: center;
+   }
 }
 
 .Slider {

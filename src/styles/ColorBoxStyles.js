@@ -1,4 +1,6 @@
 import chroma from 'chroma-js';
+import { genMediaQuery } from './constants';
+
 export default {
    colorBox: {
       width: '20%',
@@ -11,6 +13,19 @@ export default {
       marginBottom: '-5px',
       '&:hover button': {
          opacity: '1',
+      },
+
+      [genMediaQuery('lg')]: {
+         width: '33%',
+         height: '20% !important',
+      },
+      [genMediaQuery('md')]: {
+         width: '50%',
+         height: '10% !important',
+      },
+      [genMediaQuery('sm')]: {
+         width: '100%',
+         height: '10% !important',
       },
    },
    copyText: {

@@ -41,7 +41,12 @@ export class Navbar extends Component {
       const { format } = this.state;
       return (
          <nav className='Navbar'>
-            <div className='logo'>
+            <div
+               className='logo'
+               style={{
+                  width: !showSlider && '50%',
+               }}
+            >
                <a href='/'>ReactColorPicker</a>
             </div>
             {showSlider && (
@@ -60,7 +65,13 @@ export class Navbar extends Component {
                </div>
             )}
 
-            <div className='select-container'>
+            <div
+               className='select-container'
+               style={{
+                  width: !showSlider && '50%',
+                  justifyContent: 'center',
+               }}
+            >
                <Select value={format} onChange={this.handleChange}>
                   <MenuItem value='hex'>HEX - #ffffff</MenuItem>
                   <MenuItem value='rbg'>RBG - rbg(255,255,255)</MenuItem>

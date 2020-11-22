@@ -5,7 +5,7 @@ export default {
       borderRadius: '5px',
       padding: '0.5rem',
       position: 'relative',
-      overflow: 'hidden',
+      overflow: 'visible',
       '&:hover': {
          cursor: 'pointer',
       },
@@ -25,6 +25,7 @@ export default {
       paddingTop: '0.5rem',
       fontSize: '1rem',
       position: 'relative',
+      color: 'black',
    },
    emoji: {
       marginLeft: '0.5rem',
@@ -37,5 +38,26 @@ export default {
       margin: '0 auto',
       position: 'relative',
       marginBottom: '-3.5px',
+   },
+   DeleteIcon: {
+      '&:hover ': {
+         // transform: 'scale(1.1)',
+         opacity: '1',
+      },
+      borderRadius: '10px',
+      background: 'red',
+      padding: '0.2em',
+      border: '5x',
+      position: 'absolute',
+      zIndex: ' 5',
+      right: '-2px',
+      top: '-1px',
+      color: 'white',
+      transition: 'all 0.3s ease-in-out',
+      cursor: 'pointer',
+      opacity: '0.4',
+      textAlign: 'center',
+      width: '40px',
+      height: '40px',
    },
 };

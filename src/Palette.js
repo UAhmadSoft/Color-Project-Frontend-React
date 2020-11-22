@@ -8,6 +8,7 @@ import './styles/Palette.css';
 import PaletteFooter from './PaletteFooter';
 
 import styles from './styles/PaletteStyles.js';
+import NotFound from './NotFound';
 export class Palette extends Component {
    constructor(props) {
       super(props);
@@ -16,7 +17,18 @@ export class Palette extends Component {
          level: 500,
          format: 'hex',
       };
+
+      // if (props.palette) {
+      //    // * Get Palettes from Local storage
+      //    const palettes = localStorage.getItem('palettes');
+      //    console.clear();
+      //    console.log(palettes);
+
+      //    // ~ Save this palette to Local storage
+      //    localStorage.setItem('palettes', [palettes, props.palette]);
+      // }
    }
+
    changeLevel = (newLevel) => {
       this.setState({
          level: newLevel,
@@ -24,12 +36,18 @@ export class Palette extends Component {
    };
 
    changeColorFormat = (val) => {
+      console.log('into change format');
+      console.log('val is ', val);
       this.setState({
          format: val,
       });
+      console.log('format changed');
    };
 
    render() {
+      if (!this.props.palette) {
+         return <NotFound />;
+      }
       const { colors, paletteName, emoji, id } = this.props.palette;
       const { classes } = this.props;
       const { level, format } = this.state;
