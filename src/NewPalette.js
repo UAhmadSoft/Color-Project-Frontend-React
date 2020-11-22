@@ -97,8 +97,6 @@ export default function NewPalette(props) {
       setOpen(true);
    };
    const createPalette = (newPaletteName, emoji) => {
-      console.clear();
-      console.log('got into new palette');
       // let id = 'Test Palette'.toLowerCase().split(' ').join('-');
       let id = newPaletteName.toLowerCase().replace(/ /g, '-');
 
@@ -109,7 +107,6 @@ export default function NewPalette(props) {
          emoji,
       };
       savePalette(newPalette);
-      history.push('/');
    };
    const deleteAllColors = () => {
       // colors.map((el) => console.log(el));

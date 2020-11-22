@@ -65,8 +65,6 @@ function NewPaletteNav(props) {
                   palettes={palettes}
                   colorsTotal={colorsTotal}
                   createPalette={(paletteName, emoji) => {
-                     console.clear();
-                     console.log('got into new palette nav');
                      createPalette(paletteName, emoji);
                   }}
                />

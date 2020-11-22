@@ -18,7 +18,7 @@ export default function PaletteMetaForm(props) {
    const [emojiPicker, setemojiPickerOpen] = React.useState(false);
    const [newPaletteName, setnewPaletteName] = React.useState('');
 
-   const { palettes, createPalette, colorsTotal } = props;
+   const { palettes, createPalette, colorsTotal, history } = props;
 
    const classes = useStyles();
    React.useEffect(
@@ -78,6 +78,8 @@ export default function PaletteMetaForm(props) {
                title='Pick A Palette Emoji !'
                emoji='point_up'
                onSelect={(emoji) => {
+                  setemojiPickerOpen(false);
+                  window.history.back();
                   createPalette(newPaletteName, emoji.native);
                }}
                // style={{ position: 'absolute', bottom: '20px', right: '20px' }}
