@@ -5,8 +5,6 @@ import { withStyles } from '@material-ui/styles';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';
 
-import { genMediaQuery } from './styles/constants';
-
 import styles from './styles/ColorBoxStyles';
 
 export class ColorBox extends Component {

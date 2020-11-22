@@ -7,7 +7,7 @@ const MiniPalette = (props) => {
    const { classes, paletteName, emoji, colors } = props;
 
    React.useEffect(() => {
-      // console.log('rendered', paletteName);
+      console.log('rendered', paletteName);
    });
 
    React.useEffect(() => {

@@ -24,20 +24,19 @@ export default function ColorPicker(props) {
 
    const [newColorName, setnewColorName] = React.useState('');
 
-   React.useEffect(
-      () =>
-         ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
-            let isUnique = true;
-            colors.forEach((color) => {
-               if (color.name.toLowerCase() === value.toLowerCase())
-                  isUnique = false;
-            });
+   React.useEffect(() => {
+      ValidatorForm.addValidationRule('isColorNameUnique', (value) => {
+         let isUnique = true;
+         colors.forEach((color) => {
+            if (color.name.toLowerCase() === value.toLowerCase())
+               isUnique = false;
+         });
 
-            // colors.every(({name}) => name.toLowerCase() !== value.toLowerCase() )
+         // colors.every(({name}) => name.toLowerCase() !== value.toLowerCase() )
 
-            // console.log('returning ', isUnique);
-            return isUnique;
-         }),
+         // console.log('returning ', isUnique);
+         return isUnique;
+      });
       ValidatorForm.addValidationRule('isColorUnique', () => {
          let isUnique = true;
          colors.forEach((color) => {
@@ -50,8 +49,8 @@ export default function ColorPicker(props) {
 
          // console.log('returning ', isUnique);
          return isUnique;
-      })
-   );
+      });
+   });
 
    const onSubmit = () => {
       addColor({ currentColor: currentColor, newColorName: newColorName });

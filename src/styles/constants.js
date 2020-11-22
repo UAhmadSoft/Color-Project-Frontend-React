@@ -25,6 +25,8 @@ const genMediaQuery = (viewPort, specificSize) => {
 
       case 'xl':
          return `@media (max-width  : ${specificSize || xl}px)`;
+      default:
+         return `@media (max-width  : ${specificSize || lg}px)`;
    }
 };
 

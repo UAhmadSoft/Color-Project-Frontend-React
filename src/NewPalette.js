@@ -23,16 +23,12 @@ export default function NewPalette(props) {
    const classes = useStyles();
    const [open, setOpen] = React.useState(true);
    const [currentColor, setCurrentColor] = React.useState('#FB0BEB');
-   const [colors, setColors] = React.useState([]);
+   const palettecolors =
+      palettes.length > 0
+         ? palettes[0].colors.slice().splice(0, 10)
+         : SeedColors[0].colors.splice(0, 10);
+   const [colors, setColors] = React.useState(palettecolors);
    const [paletteFull, setpaletteFull] = React.useState(false);
-
-   React.useEffect(() => {
-      if (palettes.length > 0) {
-         setColors(palettes[0].colors.slice().splice(0, 10));
-      } else {
-         setColors(SeedColors[0].colors.splice(0, 10));
-      }
-   }, []);
 
    const randomNum = (range) => Math.floor(Math.random() * range);
 

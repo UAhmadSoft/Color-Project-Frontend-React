@@ -18,28 +18,26 @@ export default function PaletteMetaForm(props) {
    const [emojiPicker, setemojiPickerOpen] = React.useState(false);
    const [newPaletteName, setnewPaletteName] = React.useState('');
 
-   const { palettes, createPalette, colorsTotal, history } = props;
+   const { palettes, createPalette, colorsTotal } = props;
 
    const classes = useStyles();
-   React.useEffect(
-      () =>
-         ValidatorForm.addValidationRule('isPaletteNameUnique', () => {
-            let isUnique = true;
-            palettes.forEach((palette) => {
-               if (
-                  palette.paletteName.toLowerCase() ===
-                  newPaletteName.toLowerCase()
-               )
-                  isUnique = false;
-            });
+   React.useEffect(() => {
+      ValidatorForm.addValidationRule('isPaletteNameUnique', () => {
+         let isUnique = true;
+         palettes.forEach((palette) => {
+            if (
+               palette.paletteName.toLowerCase() ===
+               newPaletteName.toLowerCase()
+            )
+               isUnique = false;
+         });
 
-            return isUnique;
-         }),
+         return isUnique;
+      });
       ValidatorForm.addValidationRule('isPaletteEmpty', () => {
          return colorsTotal !== 0;
-      }),
-      []
-   );
+      });
+   }, [colorsTotal, newPaletteName, palettes]);
 
    const changeNewPaletteName = (e) => {
       setnewPaletteName(e.target.value);
