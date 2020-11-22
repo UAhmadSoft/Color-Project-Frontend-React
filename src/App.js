@@ -23,7 +23,6 @@ export class App extends Component {
          // * Save to this.state if it exists
          savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
 
-         console.clear();
          this.state = {
             palettes: savedPalettes || seedColors,
          };
@@ -34,7 +33,6 @@ export class App extends Component {
          this.state = {
             palettes: savedPalettes || seedColors,
          };
-         console.clear();
          console.log('error caught in catch ', e);
       }
    }
@@ -49,7 +47,6 @@ export class App extends Component {
             palettes: [...this.state.palettes, newPalette],
          },
          () => {
-            console.clear();
             console.log(
                'saveing palettes to localstorage',
                this.state.palettes
@@ -61,9 +58,8 @@ export class App extends Component {
 
    syncLocalStorage() {
       // & Save palettes to localstorage
-      console.clear();
-      console.log('syncing to local storage');
-      console.log(this.state.palettes);
+      // console.log('syncing to local storage');
+      // console.log(this.state.palettes);
       window.localStorage.setItem(
          'palettes',
          JSON.stringify(this.state.palettes)
@@ -76,7 +72,6 @@ export class App extends Component {
             palettes: this.state.palettes.filter((el) => el.id !== id),
          },
          () => {
-            console.clear();
             console.log(
                'saveing palettes to localstorage',
                this.state.palettes

@@ -3,9 +3,17 @@ import { withStyles } from '@material-ui/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './styles/MiniPaletteStyles';
 
-function MiniPalette(props) {
+const MiniPalette = (props) => {
    const { classes, paletteName, emoji, colors } = props;
-   const [confirmBox, setConfirmBox] = React.useState(false);
+
+   React.useEffect(() => {
+      // console.log('rendered', paletteName);
+   });
+
+   React.useEffect(() => {
+      console.log('rerenderd due to change of props');
+   }, [classes, paletteName, emoji, colors]);
+
    const miniColorBoxes = colors.map((color) => (
       <div
          className={classes.miniColor}
@@ -37,6 +45,6 @@ function MiniPalette(props) {
          </h5>
       </div>
    );
-}
+};
 
 export default withStyles(styles)(MiniPalette);
