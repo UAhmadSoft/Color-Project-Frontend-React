@@ -251,6 +251,7 @@ export default function NewPalette(props) {
                axis='xy'
                onSortEnd={onSortEnd}
                appBarHeight={appBarHeight}
+               distance={20}
             />
          </main>
       </div>
