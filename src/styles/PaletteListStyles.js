@@ -13,10 +13,17 @@ export default {
       backgroundImage: `url(${bg})`,
       // paddingBottom: '100px',
       '@global': {
-         '.exit': {
+         '.fade-exit': {
             opacity: '1',
          },
-         '.exit-active': {
+         '.fade-exit-active': {
+            opacity: '0',
+            transition: 'opacity 500ms ease-out',
+         },
+         '.fade-enter': {
+            opacity: '0',
+         },
+         '.fade-enter-active': {
             opacity: '0',
             transition: 'opacity 500ms ease-out',
          },

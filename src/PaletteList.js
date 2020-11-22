@@ -60,7 +60,7 @@ export class PaletteList extends Component {
 
                <TransitionGroup className={classes.palettes}>
                   {palettes.map((el) => (
-                     <CSSTransition key={el.id} className='fade' timeout={500}>
+                     <CSSTransition key={el.id} classNames='fade' timeout={500}>
                         <MiniPalette
                            {...el}
                            handleClick={this.gotoPalette}
