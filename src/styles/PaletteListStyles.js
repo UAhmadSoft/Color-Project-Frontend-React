@@ -1,5 +1,6 @@
 import { genMediaQuery } from './constants';
 
+import bg from './svgs/bg1.svg';
 export default {
    root: {
       background: 'blue',
@@ -8,6 +9,8 @@ export default {
       justifyContent: 'center',
       alignItems: 'flex-start',
       overflow: 'auto',
+      backgroundColor: '#1462aa',
+      backgroundImage: `url(${bg})`,
       // paddingBottom: '100px',
    },
    container: {
