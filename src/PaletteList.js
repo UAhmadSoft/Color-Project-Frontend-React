@@ -25,10 +25,16 @@ export class PaletteList extends Component {
    };
 
    toogleDialog = () => {
-      console.log('toogle diaglod called');
       this.setState({
          showConfirmDialog: !this.state.showConfirmDialog,
       });
+   };
+
+   deletePalette = (id) => {
+      this.setState({
+         deleteId: id,
+      });
+      this.toogleDialog();
    };
 
    render() {
@@ -66,12 +72,7 @@ export class PaletteList extends Component {
                            handleClick={this.gotoPalette}
                            key={el.id}
                            // deletePalette={(id) => deletePalette(id)}
-                           deletePalette={(id) => {
-                              this.setState({
-                                 deleteId: id,
-                              });
-                              this.toogleDialog();
-                           }}
+                           deletePalette={this.deletePalette}
                         />
                      </CSSTransition>
                   ))}
