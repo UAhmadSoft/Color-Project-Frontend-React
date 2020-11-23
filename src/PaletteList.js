@@ -38,7 +38,7 @@ export class PaletteList extends Component {
    };
 
    render() {
-      const { palettes, classes, deletePalette } = this.props;
+      const { palettes, classes, deletePalette, fetchingFromAPI } = this.props;
       return (
          <div className={classes.root}>
             <div className={classes.container}>
@@ -64,19 +64,27 @@ export class PaletteList extends Component {
                   </Link>
                </nav>
 
-               <TransitionGroup className={classes.palettes}>
-                  {palettes.map((el) => (
-                     <CSSTransition key={el.id} classNames='fade' timeout={500}>
-                        <MiniPalette
-                           {...el}
-                           handleClick={this.gotoPalette}
+               {fetchingFromAPI ? (
+                  <div className='loader'></div>
+               ) : (
+                  <TransitionGroup className={classes.palettes}>
+                     {palettes.map((el) => (
+                        <CSSTransition
                            key={el.id}
-                           // deletePalette={(id) => deletePalette(id)}
-                           deletePalette={this.deletePalette}
-                        />
-                     </CSSTransition>
-                  ))}
-               </TransitionGroup>
+                           classNames='fade'
+                           timeout={500}
+                        >
+                           <MiniPalette
+                              {...el}
+                              handleClick={this.gotoPalette}
+                              key={el.id}
+                              // deletePalette={(id) => deletePalette(id)}
+                              deletePalette={this.deletePalette}
+                           />
+                        </CSSTransition>
+                     ))}
+                  </TransitionGroup>
+               )}
                <DeletePaletteConfirm
                   open={this.state.showConfirmDialog}
                   handleClick={() => {

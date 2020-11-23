@@ -20,6 +20,7 @@ export class App extends Component {
 
       this.state = {
          palettes: [],
+         fetchingFromAPI: true,
       };
       // let savedPalettes;
       // try {
@@ -118,6 +119,7 @@ export class App extends Component {
 
       this.setState({
          palettes,
+         fetchingFromAPI: false,
       });
 
       console.log('palettes', palettes);
@@ -170,6 +172,9 @@ export class App extends Component {
                               render={(routerProps) => (
                                  <Page className='page'>
                                     <PaletteList
+                                       fetchingFromAPI={
+                                          this.state.fetchingFromAPI
+                                       }
                                        palettes={this.state.palettes}
                                        {...routerProps}
                                        deletePalette={this.deletePalette}
