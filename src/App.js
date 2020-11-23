@@ -27,8 +27,8 @@ export class App extends Component {
             palettes: savedPalettes || seedColors,
          };
 
-         console.log('savedPalettes', savedPalettes);
-         console.log('palettes', this.state.palettes);
+         // console.log('savedPalettes', savedPalettes);
+         // console.log('palettes', this.state.palettes);
       } catch (e) {
          this.state = {
             palettes: savedPalettes || seedColors,

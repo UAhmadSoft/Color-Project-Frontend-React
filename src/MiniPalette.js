@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './styles/MiniPaletteStyles';
 
-const MiniPalette = (props) => {
+const MiniPalette = React.memo((props) => {
    const { classes, paletteName, emoji, colors } = props;
 
    React.useEffect(() => {
@@ -11,7 +11,7 @@ const MiniPalette = (props) => {
    });
 
    React.useEffect(() => {
-      console.log('rerenderd due to change of props');
+      console.log('rerenderd due to change of props', paletteName);
    }, [classes, paletteName, emoji, colors]);
 
    const miniColorBoxes = colors.map((color) => (
@@ -45,6 +45,6 @@ const MiniPalette = (props) => {
          </h5>
       </div>
    );
-};
+});
 
 export default withStyles(styles)(MiniPalette);
