@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Palette from './Palette';
 import seedColors from './seedColors';
+import axios from 'axios';
 
 import { generatePalette } from './colorsHelper';
 
@@ -17,24 +18,24 @@ export class App extends Component {
    constructor(props) {
       super(props);
 
-      let savedPalettes;
-      try {
-         // ~ Get Palettes from Localstorge
-         // * Save to this.state if it exists
-         savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
+      this.state = {
+         palettes: [],
+      };
+      // let savedPalettes;
+      // try {
+      //       // ~ Get Palettes from Localstorge
+      //    // * Save to this.state if it exists
+      //    savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
 
-         this.state = {
-            palettes: savedPalettes || seedColors,
-         };
-
-         // console.log('savedPalettes', savedPalettes);
-         // console.log('palettes', this.state.palettes);
-      } catch (e) {
-         this.state = {
-            palettes: savedPalettes || seedColors,
-         };
-         console.log('error caught in catch ', e);
-      }
+      //    // console.log('savedPalettes', savedPalettes);
+      //    // console.log('palettes', this.state.palettes);
+      // } catch (e) {
+      //    console.log('error caught in catch ', e);
+      // } finally {
+      //    this.state = {
+      //       palettes: savedPalettes || seedColors,
+      //    };
+      // }
    }
 
    findPalette = (id) =>
@@ -65,6 +66,7 @@ export class App extends Component {
          JSON.stringify(this.state.palettes)
       );
    }
+
    deletePalette = (id) => {
       // console.log('deleting palette :', id);
       this.setState(
@@ -80,6 +82,46 @@ export class App extends Component {
          }
       );
    };
+
+   async componentDidMount() {
+      const res = await axios.get('http://127.0.0.1:5000/api/v1/palettes');
+      console.log(res.data.data);
+
+      // ! Change name to paletteName
+      // ! and _id to id
+      // *from api data
+
+      let palettes = res.data.data;
+
+      palettes.forEach((palette) => {
+         Object.keys(palette).forEach((key) => {
+            if (key === 'name') {
+               console.log(`changing key ${key}`);
+               Object.defineProperty(
+                  palette,
+                  'paletteName',
+                  Object.getOwnPropertyDescriptor(palette, key)
+               );
+               delete palette[key];
+            }
+            if (key === '_id') {
+               console.log(`changing key ${key}`);
+               Object.defineProperty(
+                  palette,
+                  'id',
+                  Object.getOwnPropertyDescriptor(palette, key)
+               );
+               delete palette[key];
+            }
+         });
+      });
+
+      this.setState({
+         palettes,
+      });
+
+      console.log('palettes', palettes);
+   }
    render() {
       // console.log(generatePalette(seedColors[2]));
 
