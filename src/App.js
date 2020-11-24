@@ -106,20 +106,28 @@ export class App extends Component {
       );
    }
 
-   deletePalette = (id) => {
+   deletePalette = async (id) => {
       // console.log('deleting palette :', id);
-      this.setState(
-         {
-            palettes: this.state.palettes.filter((el) => el.id !== id),
-         },
-         () => {
-            console.log(
-               'saveing palettes to localstorage',
-               this.state.palettes
-            );
-            this.syncLocalStorage();
-         }
-      );
+      // ! Deleteing Palette from DB
+      const res = await axios.delete(`${API_URL}/${id}`);
+
+      console.log('res.data', res.data);
+
+      // ~ Updating state
+      this.setState({
+         palettes: this.state.palettes.filter((el) => el.id !== id),
+      });
+      // this.setState({
+      //    palettes: this.state.palettes.filter((el) => el.id !== id),
+      // });
+      //    () => {
+      //       console.log(
+      //          'saveing palettes to localstorage',
+      //          this.state.palettes
+      //       );
+      //       this.syncLocalStorage();
+      //    }
+      // );
    };
 
    async componentDidMount() {
