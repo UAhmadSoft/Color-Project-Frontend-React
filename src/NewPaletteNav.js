@@ -20,15 +20,21 @@ function NewPaletteNav(props) {
    const {
       palettes,
       handleDrawerOpen,
-      createPalette,
       colorsTotal,
       appBarHeight,
+      updatePalette,
+      addOrUpdatePalette,
+      currentPalette,
    } = props;
 
    // const classes = useStyles();
 
    const handleClick = () => {
       handleDrawerOpen();
+   };
+
+   const handlePalette = (paletteName, emoji, update) => {
+      addOrUpdatePalette(paletteName, emoji, update);
    };
 
    return (
@@ -64,9 +70,9 @@ function NewPaletteNav(props) {
                <PaletteMetaForm
                   palettes={palettes}
                   colorsTotal={colorsTotal}
-                  createPalette={(paletteName, emoji) => {
-                     createPalette(paletteName, emoji);
-                  }}
+                  addOrUpdatePalette={handlePalette}
+                  updatePalette={updatePalette}
+                  currentPalette={currentPalette}
                />
                <div>
                   <Link to='/' style={{ textDecoration: 'none' }}>

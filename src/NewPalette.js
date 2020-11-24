@@ -16,7 +16,14 @@ import SeedColors from './seedColors';
 import { useStyles, appBarHeight } from './styles/NewPaletteStyles';
 
 export default function NewPalette(props) {
-   const { palettes, history, savePalette } = props;
+   const {
+      palettes,
+      history,
+      savePalette,
+      updatePalette,
+      currentPalette,
+      editPalette,
+   } = props;
 
    const { maxColors = 20 } = props;
 
@@ -28,11 +35,22 @@ export default function NewPalette(props) {
          ? palettes[0].colors.slice().splice(0, 10)
          : SeedColors[0].colors.splice(0, 10);
    const [colors, setColors] = React.useState(palettecolors);
-   const [paletteFull, setpaletteFull] = React.useState(false);
+   const [paletteFull, setpaletteFull] = React.useState(
+      colors.length === maxColors
+   );
+
+   // Set Colors to updatePalette Colors
+   // If we are in update mode
+   React.useEffect(() => {
+      if (updatePalette && currentPalette) {
+         setColors(currentPalette.colors);
+         setpaletteFull(currentPalette.colors.length === 20);
+      }
+   }, [updatePalette, currentPalette]);
 
    const randomNum = (range) => Math.floor(Math.random() * range);
 
-   const generateRandomColor = (source) => {
+   const generateRandomColor = () => {
       let isUniqueColor = true;
       let randomColor;
       while (isUniqueColor) {
@@ -91,14 +109,17 @@ export default function NewPalette(props) {
       //    'array after del is ',
       //    colors.filter((color) => color.name !== colorName)
       // );
+
       setColors(colors.filter((color) => color.name !== colorName));
+      setpaletteFull(false);
    };
 
    const handleDrawerOpen = () => {
       // colors.map((el) => console.log(el));
       setOpen(true);
    };
-   const createPalette = (newPaletteName, emoji) => {
+
+   const addOrUpdatePalette = (newPaletteName, emoji, update) => {
       // let id = 'Test Palette'.toLowerCase().split(' ').join('-');
       let id = newPaletteName.toLowerCase().replace(/ /g, '-');
 
@@ -108,7 +129,11 @@ export default function NewPalette(props) {
          colors: colors,
          emoji,
       };
-      savePalette(newPalette);
+
+      console.log('newPalette', newPalette);
+      if (update === true) {
+         editPalette(newPalette);
+      } else savePalette(newPalette);
    };
    const deleteAllColors = () => {
       // colors.map((el) => console.log(el));
@@ -152,7 +177,7 @@ export default function NewPalette(props) {
          name: colorObject.newColorName,
       };
 
-      console.log('setting new color ', newColorObj);
+      // console.log('setting new color ', newColorObj);
       setColors((currentColors) => [...currentColors, newColorObj]);
 
       setCurrentColor(generateRandomColor().color);
@@ -160,7 +185,7 @@ export default function NewPalette(props) {
 
    const handleChangeComplete = (color) => {
       console.clear();
-      console.log('chaanging currentColor to ', color);
+      // console.log('changing currentColor to ', color);
       setCurrentColor(color.hex);
    };
 
@@ -176,8 +201,10 @@ export default function NewPalette(props) {
             palettes={palettes}
             handleDrawerOpen={handleDrawerOpen}
             // classes={classes}
+            updatePalette={updatePalette}
+            currentPalette={currentPalette}
             open={open}
-            createPalette={createPalette}
+            addOrUpdatePalette={addOrUpdatePalette}
             colorsTotal={colors.length}
             appBarHeight={appBarHeight}
          />

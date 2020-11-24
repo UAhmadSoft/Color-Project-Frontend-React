@@ -23,6 +23,7 @@ export class App extends Component {
       this.state = {
          palettes: [],
          fetchingFromAPI: true,
+         updatePaletteId: '',
       };
       // let savedPalettes;
       // try {
@@ -67,7 +68,7 @@ export class App extends Component {
             delete newPalette[key];
          }
          if (key === '_id') {
-            console.log(`changing key ${key}`);
+            // console.log(`changing key ${key}`);
             Object.defineProperty(
                newPalette,
                'id',
@@ -106,6 +107,50 @@ export class App extends Component {
       );
    }
 
+   editPalette = async (updatedPalette) => {
+      // console.log('updatedPalettes', updatedPalette);
+      const res = await axios.patch(
+         `${API_URL}/${this.state.updatePaletteId}`,
+         {
+            palette: updatedPalette,
+         }
+      );
+
+      let newPalette = res.data.data;
+
+      Object.keys(newPalette).forEach((key) => {
+         if (key === 'name') {
+            // console.log(`changing key ${key}`);
+            Object.defineProperty(
+               newPalette,
+               'paletteName',
+               Object.getOwnPropertyDescriptor(newPalette, key)
+            );
+            delete newPalette[key];
+         }
+         if (key === '_id') {
+            // console.log(`changing key ${key}`);
+            Object.defineProperty(
+               newPalette,
+               'id',
+               Object.getOwnPropertyDescriptor(newPalette, key)
+            );
+            delete newPalette[key];
+         }
+      });
+
+      console.log('newPalette', newPalette);
+
+      const newPalettes = this.state.palettes.filter(
+         (palette) => palette.id != this.state.updatePaletteId
+      );
+      this.setState({
+         palettes: [newPalettes, newPalette],
+      });
+
+      // console.log('res.data', res.data);
+   };
+
    deletePalette = async (id) => {
       // console.log('deleting palette :', id);
       // ! Deleteing Palette from DB
@@ -127,12 +172,19 @@ export class App extends Component {
       //       );
       //       this.syncLocalStorage();
       //    }
+
       // );
+   };
+
+   changeUpdateId = (id) => {
+      this.setState({
+         updatePaletteId: id,
+      });
    };
 
    async componentDidMount() {
       const res = await axios.get(API_URL);
-      console.log(res.data.data);
+      // console.log(res.data.data);
 
       // ! Change name to paletteName
       // ! and _id to id
@@ -152,7 +204,7 @@ export class App extends Component {
                delete palette[key];
             }
             if (key === '_id') {
-               console.log(`changing key ${key}`);
+               // console.log(`changing key ${key}`);
                Object.defineProperty(
                   palette,
                   'id',
@@ -191,6 +243,29 @@ export class App extends Component {
                                  <Page className='page'>
                                     <NewPalette
                                        savePalette={this.savePalette}
+                                       updatePalette={false}
+                                       // editPalette={this.editPalette}
+                                       // currentPalette={this.state.palettes[0]}
+                                       {...routerProps}
+                                       palettes={this.state.palettes}
+                                    />
+                                 </Page>
+                              )}
+                           />
+                           <Route
+                              exact
+                              path='/updatePalette/:id'
+                              render={(routerProps) => (
+                                 <Page className='page'>
+                                    <NewPalette
+                                       savePalette={this.savePalette}
+                                       updatePalette={true}
+                                       editPalette={this.editPalette}
+                                       currentPalette={this.state.palettes.find(
+                                          (palette) =>
+                                             palette.id ===
+                                             routerProps.match.params.id
+                                       )}
                                        {...routerProps}
                                        palettes={this.state.palettes}
                                     />
@@ -221,6 +296,7 @@ export class App extends Component {
                                        fetchingFromAPI={
                                           this.state.fetchingFromAPI
                                        }
+                                       changeUpdateId={this.changeUpdateId}
                                        palettes={this.state.palettes}
                                        {...routerProps}
                                        deletePalette={this.deletePalette}

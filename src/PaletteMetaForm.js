@@ -16,17 +16,24 @@ import useStyles from './styles/PaletteMetaFormStyles';
 export default function PaletteMetaForm(props) {
    const [open, setOpen] = React.useState(false);
    const [emojiPicker, setemojiPickerOpen] = React.useState(false);
-   const [newPaletteName, setnewPaletteName] = React.useState('');
 
-   const { palettes, createPalette, colorsTotal } = props;
+   const {
+      palettes,
+      addOrUpdatePalette,
+      colorsTotal,
+      updatePalette,
+      currentPalette,
+   } = props;
+
+   const [newPaletteName, setnewPaletteName] = React.useState('');
 
    const classes = useStyles();
    React.useEffect(() => {
       ValidatorForm.addValidationRule('isPaletteNameUnique', () => {
          let isUnique = true;
-         palettes.forEach((palette) => {
+         palettes.forEach((currentPalette) => {
             if (
-               palette.paletteName.toLowerCase() ===
+               currentPalette.paletteName.toLowerCase() ===
                newPaletteName.toLowerCase()
             )
                isUnique = false;
@@ -38,6 +45,12 @@ export default function PaletteMetaForm(props) {
          return colorsTotal !== 0;
       });
    }, [colorsTotal, newPaletteName, palettes]);
+   React.useEffect(() => {
+      // console.log('current', currentPalette);
+      if (updatePalette && currentPalette) {
+         setnewPaletteName(currentPalette.paletteName);
+      }
+   }, [currentPalette, updatePalette]);
 
    const changeNewPaletteName = (e) => {
       setnewPaletteName(e.target.value);
@@ -45,6 +58,17 @@ export default function PaletteMetaForm(props) {
 
    const handleClickOpen = () => {
       setOpen(true);
+   };
+
+   const saveOrUpdatePalette = (emoji) => {
+      setemojiPickerOpen(false);
+
+      if (updatePalette) {
+         addOrUpdatePalette(newPaletteName, emoji.native, true);
+      } else {
+         addOrUpdatePalette(newPaletteName, emoji.native, false);
+      }
+      window.history.back();
    };
 
    const handleClose = () => {
@@ -75,11 +99,7 @@ export default function PaletteMetaForm(props) {
                set='apple'
                title='Pick A Palette Emoji !'
                emoji='point_up'
-               onSelect={(emoji) => {
-                  setemojiPickerOpen(false);
-                  window.history.back();
-                  createPalette(newPaletteName, emoji.native);
-               }}
+               onSelect={saveOrUpdatePalette}
                // style={{ position: 'absolute', bottom: '20px', right: '20px' }}
             />
 
@@ -101,7 +121,7 @@ export default function PaletteMetaForm(props) {
             onClick={handleClickOpen}
          >
             <PaletteIcon style={{ marginRight: '10px' }} />
-            Save Palette
+            {updatePalette ? 'Update Palette' : 'Save Palette'}
          </Button>
          <Dialog
             open={open}
@@ -115,7 +135,7 @@ export default function PaletteMetaForm(props) {
                }}
                className={classes.DialogTitle}
             >
-               Save Palette
+               {updatePalette ? 'Update Palette' : 'Save Palette'}
             </DialogTitle>
             <DialogContent className={classes.DialogContent}>
                <DialogContentText
@@ -174,7 +194,7 @@ export default function PaletteMetaForm(props) {
                   variant='contained'
                   style={{ cursor: 'pointer' }}
                >
-                  Save Palette
+                  {updatePalette ? 'Update Palette' : 'Save Palette'}
                </Button>
             </DialogActions>
          </Dialog>

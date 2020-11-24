@@ -37,6 +37,11 @@ export class PaletteList extends Component {
       this.toogleDialog();
    };
 
+   editPalette = (id) => {
+      this.props.changeUpdateId(id);
+      this.props.history.push(`/updatePalette/${id}`);
+   };
+
    render() {
       const { palettes, classes, deletePalette, fetchingFromAPI } = this.props;
       return (
@@ -80,6 +85,7 @@ export class PaletteList extends Component {
                               key={el.id}
                               // deletePalette={(id) => deletePalette(id)}
                               deletePalette={this.deletePalette}
+                              editPalette={this.editPalette}
                            />
                         </CSSTransition>
                      ))}
