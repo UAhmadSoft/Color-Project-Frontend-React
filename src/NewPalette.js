@@ -39,31 +39,37 @@ export default function NewPalette(props) {
          isUniqueColor = false;
 
          // console.log('randomNum is', randomNum());
+         // * 1 Generate Random Color
          if (palettes.length === 0) {
+            console.log('palette.lenth=0');
             const randomPalette = SeedColors[randomNum(SeedColors.length)];
-            console.clear();
             console.log('random palette is', randomPalette);
             randomColor =
                randomPalette.colors[randomNum(randomPalette.colors.length)];
          } else {
-            randomColor =
-               palettes[randomNum(palettes.length)].colors[
-                  randomNum(colors.length)
-               ];
+            console.log('palette.lenth!=0');
+            const randomColors = palettes[randomNum(palettes.length)].colors;
+            randomColor = randomColors[randomNum(randomColors.length)];
          }
+         console.clear();
          console.log('random color is ', JSON.stringify(randomColor));
 
+         // * 2 Ensure Color is NOT duplicate
          if (colors.length === 0) {
             break;
          }
          for (let i = 0; i < colors.length; i++) {
             if (colors[i].color === randomColor.color) {
                isUniqueColor = true;
+               break;
             }
             if (
                colors[i].name.toLowerCase() === randomColor.name.toLowerCase()
             ) {
                isUniqueColor = true;
+               break;
+            } else {
+               isUniqueColor = false;
             }
          }
          // isUniqueColor = false;
@@ -132,8 +138,7 @@ export default function NewPalette(props) {
 
       // ^ Palette is NOT Full - Add New Color
       if (colorObject.randomColor) {
-         console.clear();
-
+         // console.clear();
          // console.log(' random color is', colorObject.randomColor);
          setColors((currentColors) => [
             ...currentColors,
