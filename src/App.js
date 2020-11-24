@@ -14,6 +14,8 @@ import NotFound from './NotFound';
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Page from './Page';
+
+const API_URL = 'http://127.0.0.1:5000/api/v1/palettes';
 export class App extends Component {
    constructor(props) {
       super(props);
@@ -42,20 +44,56 @@ export class App extends Component {
    findPalette = (id) =>
       this.state.palettes.find((palette) => palette.id === id);
 
-   savePalette = (newPalette) => {
+   savePalette = async (newPalette) => {
       // console.log(newPalette);
-      this.setState(
-         {
-            palettes: [...this.state.palettes, newPalette],
-         },
-         () => {
-            console.log(
-               'saveing palettes to localstorage',
-               this.state.palettes
+
+      // % Saving new Palette to DB
+      const res = await axios.post(API_URL, {
+         palette: newPalette,
+      });
+
+      console.clear();
+      // console.log('res', res.data.data);
+      newPalette = res.data.data;
+
+      Object.keys(newPalette).forEach((key) => {
+         if (key === 'name') {
+            // console.log(`changing key ${key}`);
+            Object.defineProperty(
+               newPalette,
+               'paletteName',
+               Object.getOwnPropertyDescriptor(newPalette, key)
             );
-            this.syncLocalStorage();
+            delete newPalette[key];
          }
-      );
+         if (key === '_id') {
+            console.log(`changing key ${key}`);
+            Object.defineProperty(
+               newPalette,
+               'id',
+               Object.getOwnPropertyDescriptor(newPalette, key)
+            );
+            delete newPalette[key];
+         }
+      });
+
+      console.log('newPalette', newPalette);
+
+      this.setState({
+         palettes: [...this.state.palettes, newPalette],
+      });
+      // this.setState(
+      //    {
+      //       palettes: [...this.state.palettes, newPalette],
+      //    },
+      //    () => {
+      //       console.log(
+      //          'saveing palettes to localstorage',
+      //          this.state.palettes
+      //       );
+      //       this.syncLocalStorage();
+      //    }
+      // );
    };
 
    syncLocalStorage() {
@@ -85,12 +123,12 @@ export class App extends Component {
    };
 
    async componentDidMount() {
-      const res = await axios.get('http://127.0.0.1:5000/api/v1/palettes');
+      const res = await axios.get(API_URL);
       console.log(res.data.data);
 
       // ! Change name to paletteName
       // ! and _id to id
-      // *from api data
+      // * from api data
 
       let palettes = res.data.data;
 
@@ -122,7 +160,7 @@ export class App extends Component {
          fetchingFromAPI: false,
       });
 
-      console.log('palettes', palettes);
+      // console.log('palettes', palettes);
    }
    render() {
       // console.log(generatePalette(seedColors[2]));
