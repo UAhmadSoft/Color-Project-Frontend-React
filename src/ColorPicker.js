@@ -50,6 +50,9 @@ export default function ColorPicker(props) {
          // console.log('returning ', isUnique);
          return isUnique;
       });
+      ValidatorForm.addValidationRule('isPaletteFull', () => {
+         return !paletteFull;
+      });
    });
 
    const onSubmit = () => {
@@ -79,12 +82,19 @@ export default function ColorPicker(props) {
                onChange={handleChange}
                placeholder='Color Name'
                className={classes.colorNameInput}
-               validators={['required', 'isColorNameUnique', 'isColorUnique']}
+               validators={[
+                  'required',
+                  'isColorNameUnique',
+                  'isColorUnique',
+                  'isPaletteFull',
+               ]}
                errorMessages={[
                   'Plz enter Color Name',
                   'Color Name already exists !',
                   'Color already exists !',
+                  'Palette is Full !',
                ]}
+               disabled={paletteFull}
             />
             <span
                className={paletteFull && classes.disabled}

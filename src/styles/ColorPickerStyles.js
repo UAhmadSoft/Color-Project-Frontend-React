@@ -21,6 +21,9 @@ export default makeStyles(() => ({
       //    chroma(props.currentColor).luminance() <= 0.08 ? 'white' : 'black',
    },
    colorNameInput: {
+      '& .Mui-error input': {
+         cursor: 'not-allowed',
+      },
       width: '100%',
       height: '70px',
       '& input': {
