@@ -17,7 +17,7 @@ export class ColorBox extends Component {
       };
    }
    changeCopyState = () => {
-      console.log('copied called');
+      // console.log('copied called');
       this.setState({ copied: true }, () => {
          setTimeout(
             () =>

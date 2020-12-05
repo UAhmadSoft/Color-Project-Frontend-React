@@ -59,18 +59,16 @@ export default function NewPalette(props) {
          // console.log('randomNum is', randomNum());
          // * 1 Generate Random Color
          if (palettes.length === 0) {
-            console.log('palette.lenth=0');
             const randomPalette = SeedColors[randomNum(SeedColors.length)];
-            console.log('random palette is', randomPalette);
+            // console.log('random palette is', randomPalette);
             randomColor =
                randomPalette.colors[randomNum(randomPalette.colors.length)];
          } else {
-            console.log('palette.lenth!=0');
             const randomColors = palettes[randomNum(palettes.length)].colors;
             randomColor = randomColors[randomNum(randomColors.length)];
          }
-         console.clear();
-         console.log('random color is ', JSON.stringify(randomColor));
+         // console.clear();
+         // console.log('random color is ', JSON.stringify(randomColor));
 
          // * 2 Ensure Color is NOT duplicate
          if (colors.length === 0) {
@@ -130,7 +128,7 @@ export default function NewPalette(props) {
          emoji,
       };
 
-      console.log('newPalette', newPalette);
+      // console.log('newPalette', newPalette);
       if (update === true) {
          editPalette(newPalette);
       } else savePalette(newPalette);

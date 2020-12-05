@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Palette from './Palette';
-import seedColors from './seedColors';
+// import seedColors from './seedColors';
 import axios from 'axios';
 
 import { generatePalette } from './colorsHelper';
@@ -15,7 +15,8 @@ import NotFound from './NotFound';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import Page from './Page';
 
-const API_URL = 'http://127.0.0.1:5000/api/v1/palettes';
+const API_URL = 'https://node-colors-api.herokuapp.com/api/v1/palettes';
+// const API_URL = 'http://127.0.0.1:5000/api/v1/palettes';
 export class App extends Component {
    constructor(props) {
       super(props);
@@ -78,7 +79,7 @@ export class App extends Component {
          }
       });
 
-      console.log('newPalette', newPalette);
+      // console.log('newPalette', newPalette);
 
       this.setState({
          palettes: [...this.state.palettes, newPalette],
@@ -139,13 +140,23 @@ export class App extends Component {
          }
       });
 
-      console.log('newPalette', newPalette);
+      // console.log('newPalette', newPalette);
 
-      const newPalettes = this.state.palettes.filter(
-         (palette) => palette.id != this.state.updatePaletteId
+      // Find Index of Updated Palette
+      const index = this.state.palettes.findIndex(
+         (palette) => palette.id === this.state.updatePaletteId
       );
+
+      // Filter paletted which are NOT updated
+      let newPalettes = this.state.palettes.filter(
+         (palette) => palette.id !== this.state.updatePaletteId
+      );
+
+      // Add updated Palette to its original index
+      newPalettes.splice(index, 0, newPalette);
+
       this.setState({
-         palettes: [newPalettes, newPalette],
+         palettes: newPalettes,
       });
 
       // console.log('res.data', res.data);
@@ -156,7 +167,7 @@ export class App extends Component {
       // ! Deleteing Palette from DB
       const res = await axios.delete(`${API_URL}/${id}`);
 
-      console.log('res.data', res.data);
+      // console.log('res.data', res.data);
 
       // ~ Updating state
       this.setState({
@@ -195,7 +206,7 @@ export class App extends Component {
       palettes.forEach((palette) => {
          Object.keys(palette).forEach((key) => {
             if (key === 'name') {
-               console.log(`changing key ${key}`);
+               // console.log(`changing key ${key}`);
                Object.defineProperty(
                   palette,
                   'paletteName',

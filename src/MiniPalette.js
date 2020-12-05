@@ -8,11 +8,11 @@ const MiniPalette = React.memo((props) => {
    const { classes, paletteName, emoji, colors } = props;
 
    React.useEffect(() => {
-      console.log('rendered', paletteName);
+      // console.log('rendered', paletteName);
    });
 
    React.useEffect(() => {
-      console.log('rerenderd due to change of props', paletteName);
+      // console.log('rerenderd due to change of props', paletteName);
    }, [classes, paletteName, emoji, colors]);
 
    const miniColorBoxes = colors.map((color) => (
@@ -24,7 +24,6 @@ const MiniPalette = React.memo((props) => {
    ));
 
    function handleClick() {
-      console.log('handleClick of Minipalette');
       props.handleClick(props.id);
    }
 

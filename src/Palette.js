@@ -36,12 +36,9 @@ export class Palette extends Component {
    };
 
    changeColorFormat = (val) => {
-      console.log('into change format');
-      console.log('val is ', val);
       this.setState({
          format: val,
       });
-      console.log('format changed');
    };
 
    render() {
