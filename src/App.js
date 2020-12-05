@@ -165,7 +165,7 @@ export class App extends Component {
    deletePalette = async (id) => {
       // console.log('deleting palette :', id);
       // ! Deleteing Palette from DB
-      const res = await axios.delete(`${API_URL}/${id}`);
+      await axios.delete(`${API_URL}/${id}`);
 
       // console.log('res.data', res.data);
 
