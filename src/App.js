@@ -11,6 +11,8 @@ import SingleColorPalette from './Components/SingleColorPalette';
 import NewPalette from './Components/NewPalette';
 import NotFound from './Components/NotFound';
 import Page from './Components/Page';
+import Login from './Components/Login';
+import Register from './Components/Register';
 
 import './styles/App.css';
 
@@ -329,6 +331,24 @@ export class App extends Component {
                                           routerProps.match.params.colorId
                                        }
                                     />
+                                 </Page>
+                              )}
+                           />
+                           <Route
+                              exact
+                              path='/login'
+                              render={(routerProps) => (
+                                 <Page className='page'>
+                                    <Login {...routerProps} />
+                                 </Page>
+                              )}
+                           />
+                           <Route
+                              exact
+                              path='/register'
+                              render={(routerProps) => (
+                                 <Page className='page'>
+                                    <Register {...routerProps} />
                                  </Page>
                               )}
                            />
