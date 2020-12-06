@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import Palette from './Palette';
-// import seedColors from './seedColors';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import axios from 'axios';
 
+// import seedColors from './seedColors';
 import { generatePalette } from './colorsHelper';
+import { Switch, Route } from 'react-router-dom';
+import Palette from './Components/Palette';
+import PaletteList from './Components/PaletteList';
+import SingleColorPalette from './Components/SingleColorPalette';
+import NewPalette from './Components/NewPalette';
+import NotFound from './Components/NotFound';
+import Page from './Components/Page';
 
 import './styles/App.css';
-import { Switch, Route } from 'react-router-dom';
-import PaletteList from './PaletteList';
-import SingleColorPalette from './SingleColorPalette';
-import NewPalette from './NewPalette';
-import NotFound from './NotFound';
-
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import Page from './Page';
 
 const API_URL = 'https://node-colors-api.herokuapp.com/api/v1/palettes';
 // const API_URL = 'http://127.0.0.1:5000/api/v1/palettes';

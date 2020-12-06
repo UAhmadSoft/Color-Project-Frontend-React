@@ -11,7 +11,7 @@ import { DialogContentText } from '@material-ui/core';
 import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 
-import useStyles from './styles/PaletteMetaFormStyles';
+import useStyles from '../styles/PaletteMetaFormStyles';
 
 export default function PaletteMetaForm(props) {
    const [open, setOpen] = React.useState(false);

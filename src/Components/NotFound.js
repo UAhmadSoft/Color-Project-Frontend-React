@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './styles/NotFound.css';
+import '../styles/NotFound.css';
 export class NotFound extends Component {
    //    {
    //    height: 100vh;

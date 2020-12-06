@@ -7,7 +7,7 @@ import { ChromePicker } from 'react-color';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import chroma from 'chroma-js';
 
-import useStyles from './styles/ColorPickerStyles';
+import useStyles from '../styles/ColorPickerStyles';
 
 export default function ColorPicker(props) {
    const {

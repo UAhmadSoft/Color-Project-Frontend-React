@@ -4,7 +4,7 @@ import DeletePaletteConfirm from './DeletePaletteConfirm';
 
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import styles from './styles/PaletteListStyles';
+import styles from '../styles/PaletteListStyles';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import { withStyles } from '@material-ui/styles';
 import { Link } from 'react-router-dom';

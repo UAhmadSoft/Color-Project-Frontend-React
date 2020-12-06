@@ -4,10 +4,10 @@ import { withStyles } from '@material-ui/styles';
 
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
-import './styles/Palette.css';
+import '../styles/Palette.css';
 import PaletteFooter from './PaletteFooter';
 
-import styles from './styles/PaletteStyles.js';
+import styles from '../styles/PaletteStyles.js';
 import NotFound from './NotFound';
 export class Palette extends Component {
    constructor(props) {

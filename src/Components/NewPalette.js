@@ -11,9 +11,9 @@ import { arrayMove } from 'react-sortable-hoc';
 import NewPaletteNav from './NewPaletteNav';
 import ColorPicker from './ColorPicker';
 
-import SeedColors from './seedColors';
+import SeedColors from '../seedColors';
 
-import { useStyles, appBarHeight } from './styles/NewPaletteStyles';
+import { useStyles, appBarHeight } from '../styles/NewPaletteStyles';
 
 export default function NewPalette(props) {
    const {

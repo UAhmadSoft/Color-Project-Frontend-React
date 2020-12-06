@@ -10,7 +10,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { Button, Typography } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
-import useStyles from './styles/NewPaletteNavStyles';
+import useStyles from '../styles/NewPaletteNavStyles';
 
 import PaletteMetaForm from './PaletteMetaForm';
 

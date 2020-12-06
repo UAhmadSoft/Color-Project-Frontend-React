@@ -5,10 +5,10 @@ import Navbar from './Navbar';
 
 import { withStyles } from '@material-ui/styles';
 
-import './styles/Palette.css';
+import '../styles/Palette.css';
 import PaletteFooter from './PaletteFooter';
 
-import styles from './styles/SinglePaletteStyles';
+import styles from '../styles/SinglePaletteStyles';
 
 export class SingleColorPalette extends Component {
    constructor(props) {
