@@ -58,7 +58,7 @@ const Login = (props) => {
 
             <div className='ForgotBtns'>
                <span className='txt1'> Forgot </span>
-               <a className='forgotPass' href='#'>
+               <a className='forgotPass' href='/forgot'>
                   Username / Password?
                </a>
                <br />
